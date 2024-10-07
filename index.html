@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xiaomi Bootloader Unlock Guide</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #1A73E8;
+            text-align: center;
+        }
+        h2, h3 {
+            color: #333;
+        }
+        ul, ol {
+            margin: 20px 0;
+        }
+        a {
+            color: #1A73E8;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Full Guide: Unlocking the Bootloader on Xiaomi Devices</h1>
+
+    <h2>Prerequisites</h2>
+    <ul>
+        <li>A Xiaomi account logged in on your device</li>
+        <li>A Windows PC</li>
+        <li><a href="https://developer.android.com/studio/releases/platform-tools" target="_blank">ADB and Fastboot</a> installed</li>
+        <li><a href="https://en.miui.com/unlock/" target="_blank">Mi Unlock Tool</a></li>
+        <li>USB cable</li>
+        <li>Backup your important data</li>
+        <li>Charge your phone to at least 60%</li>
+        <li>For HyperOS devices, install the <a href="https://play.google.com/store/apps/details?id=com.mi.global.bbs" target="_blank">Xiaomi Community App</a></li>
+    </ul>
+
+    <h2>1. Apply for Bootloader Unlock on HyperOS Devices (Xiaomi Community App)</h2>
+    <ol>
+        <li>Install the <a href="https://play.google.com/store/apps/details?id=com.mi.global.bbs" target="_blank">Xiaomi Community App</a>.</li>
+        <li>Log in using your Xiaomi account.</li>
+        <li>Navigate to the "Services" section in the app.</li>
+        <li>Submit a request to unlock the bootloader in the "Unlock Bootloader Application" section.</li>
+        <li>Wait for Xiaomi’s approval, which can take up to 7 days.</li>
+    </ol>
+
+    <h2>2. Enable Developer Options</h2>
+    <ol>
+        <li>Go to <strong>Settings</strong> > <strong>About phone</strong>.</li>
+        <li>Tap <strong>MIUI Version</strong> or <strong>HyperOS Version</strong> 7 times to enable developer options.</li>
+    </ol>
+
+    <h2>3. Enable OEM Unlocking and USB Debugging</h2>
+    <ol>
+        <li>Go to <strong>Settings</strong> > <strong>Additional settings</strong> > <strong>Developer options</strong>.</li>
+        <li>Enable <strong>OEM Unlocking</strong> and <strong>USB Debugging</strong>.</li>
+    </ol>
+
+    <h2>4. Link Xiaomi Account to Mi Unlock Status</h2>
+    <ol>
+        <li>In <strong>Developer Options</strong>, tap <strong>Mi Unlock status</strong>.</li>
+        <li>Tap <strong>Add account and device</strong> and ensure your Xiaomi account is logged in.</li>
+    </ol>
+
+    <h2>5. Install ADB, Fastboot, and Drivers</h2>
+    <ol>
+        <li>Download and install <a href="https://forum.xda-developers.com/showthread.php?t=2317790" target="_blank">Minimal ADB and Fastboot</a> or the official <a href="https://developer.android.com/studio/releases/platform-tools" target="_blank">Google Platform Tools</a>.</li>
+        <li>If needed, install the <a href="https://xiaomifirmware.com/downloads/" target="_blank">Xiaomi USB Drivers</a>.</li>
+    </ol>
+
+    <h2>6. Download Mi Unlock Tool</h2>
+    <ol>
+        <li>Download the official <a href="https://en.miui.com/unlock/" target="_blank">Mi Unlock Tool</a> from Xiaomi’s website.</li>
+        <li>Extract and install it on your PC.</li>
+    </ol>
+
+    <h2>7. Boot into Fastboot Mode</h2>
+    <ol>
+        <li>Power off your Xiaomi device.</li>
+        <li>Hold <strong>Volume Down + Power</strong> to enter Fastboot Mode.</li>
+        <li>Connect your phone to the PC using a USB cable.</li>
+    </ol>
+
+    <h2>8. Unlock the Bootloader Using Mi Unlock Tool</h2>
+    <ol>
+        <li>Open the Mi Unlock Tool and sign in with the same Xiaomi account used on your phone.</li>
+        <li>The tool will detect your device.</li>
+        <li>Click <strong>Unlock</strong> and follow the instructions. For MIUI devices, a 168-hour wait might be required before unlocking.</li>
+        <li>Once the waiting period ends, reconnect the device and click <strong>Unlock</strong> again.</li>
+    </ol>
+
+    <h2>9. Complete the Unlock Process</h2>
+    <ol>
+        <li>Once unlocked, the device will reboot and reset.</li>
+        <li>Set up your phone as a new device (all data will be erased).</li>
+    </ol>
+
+    <h2>Post-Unlocking: What's Next?</h2>
+    <ul>
+        <li>Install custom ROMs, root your device, or install custom recoveries like TWRP.</li>
+        <li>Keep in mind unlocking may void your warranty and disable certain security features.</li>
+    </ul>
+
+    <h2>Useful Links</h2>
+    <ul>
+        <li><a href="https://rm-ux.github.io/pipa-crom-guide/" target="_blank">Custom ROM Guide for Xiaomi Devices</a></li>
+        <li><a href="https://rm-ux.github.io/pipa_root/" target="_blank">Root Guide for Xiaomi Devices</a></li>
+    </ul>
+
+    <footer>
+        Guide and website by: rmux
+    </footer>
+</div>
+
+</body>
+                                      </html>

@@ -8,32 +8,32 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-image: url('https://media1.giphy.com/media/1154CgmtPPa4lq/giphy.gif?cid=6c09b9520qi8z0fxsy8816q0rvosp2y0wip6lmy91tvo9l8j&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g'); /* Set background to GIF */
-            background-size: cover; /* Cover the entire body */
-            background-position: center; /* Center the background */
+            background-image: url('https://media1.giphy.com/media/1154CgmtPPa4lq/giphy.gif?cid=6c09b9520qi8z0fxsy8816q0rvosp2y0wip6lmy91tvo9l8j&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g');
+            background-size: cover;
+            background-position: center;
             margin: 0;
             padding: 0;
-            color: #fff; /* Change text color to white for better visibility */
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            color: #fff;
+            overflow-x: hidden;
         }
 
         .container {
             max-width: 900px;
-            margin: 0 auto; /* Center the container */
-            background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background for better visibility */
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.7);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             position: relative;
-            overflow-y: auto; /* Enable vertical scroll if content overflows */
-            height: 100vh; /* Full height of the viewport */
+            overflow-y: auto;
+            height: 100vh;
         }
 
         h1 {
             color: #1A73E8;
             text-align: center;
-            animation: textFlash 1s infinite alternate; /* Flashing effect */
-            font-size: 2.5rem; /* Responsive font size */
+            animation: textFlash 1s infinite alternate;
+            font-size: 2.5rem;
         }
 
         @keyframes textFlash {
@@ -43,20 +43,20 @@
 
             100% {
                 color: yellow;
-            } /* Flashing colors */
+            }
         }
 
         h2,
         h3 {
-            color: #fff; /* Set headings color to white */
-            font-size: 1.75rem; /* Responsive font size */
+            color: #fff;
+            font-size: 1.75rem;
             margin-top: 20px;
         }
 
         ul,
         ol {
             margin: 20px 0;
-            font-size: 1.2rem; /* Responsive font size */
+            font-size: 1.2rem;
         }
 
         a {
@@ -69,42 +69,40 @@
         }
 
         pre {
-            background: rgba(255, 255, 255, 0.2); /* Slightly transparent background for code blocks */
+            background: rgba(255, 255, 255, 0.2);
             padding: 10px;
             border-radius: 5px;
             overflow-x: auto;
-            color: #fff; /* Set code text color to white */
+            color: #fff;
         }
 
         footer {
             text-align: center;
             margin-top: 40px;
             font-size: 0.9em;
-            color: #ccc; /* Lighter color for footer text */
+            color: #ccc;
         }
 
-        /* Eye effect */
         .eye {
             position: absolute;
-            width: 100px; /* Adjust the size of the eye */
-            height: 100px; /* Adjust the size of the eye */
-            background-image: url('https://media.giphy.com/media/1154CgmtPPa4lq/giphy.gif'); /* Eye GIF */
+            width: 100px;
+            height: 100px;
+            background-image: url('https://media.giphy.com/media/1154CgmtPPa4lq/giphy.gif');
             background-size: contain;
             background-repeat: no-repeat;
-            pointer-events: none; /* Prevent mouse interactions */
-            transition: transform 0.1s ease; /* Smooth movement */
-            z-index: 1000; /* Ensure the eye is above other content */
+            pointer-events: none;
+            transition: transform 0.1s ease;
+            z-index: 1000;
         }
 
-        /* Cryptic message effect */
         .cryptic {
             position: absolute;
-            color: #FF0000; /* Boston red */
+            color: #FF0000;
             white-space: nowrap;
-            font-size: 1.5rem; /* Responsive font size */
+            font-size: 1.5rem;
             animation: fall 5s infinite linear;
             opacity: 0;
-            z-index: 999; /* Ensure messages are above other content */
+            z-index: 999;
         }
 
         @keyframes fall {
@@ -119,25 +117,24 @@
             }
         }
 
-        /* Mobile adjustments */
         @media (max-width: 600px) {
             h1 {
-                font-size: 2rem; /* Adjust heading size for mobile */
+                font-size: 2rem;
             }
 
             h2,
             h3 {
-                font-size: 1.5rem; /* Adjust heading size for mobile */
+                font-size: 1.5rem;
             }
 
             ul,
             ol {
-                font-size: 1rem; /* Adjust list size for mobile */
+                font-size: 1rem;
             }
 
             .eye {
-                width: 80px; /* Smaller eye for mobile */
-                height: 80px; /* Smaller eye for mobile */
+                width: 80px;
+                height: 80px;
             }
         }
     </style>
@@ -235,37 +232,45 @@
         ];
 
         function createCrypticMessage() {
-            const message = document.createElement('div');
-            message.className = 'cryptic';
+            const message = document.createElement("div");
+            message.classList.add("cryptic");
             message.textContent = crypticMessages[Math.floor(Math.random() * crypticMessages.length)];
-            message.style.left = Math.random() * (window.innerWidth - 200) + 'px'; // Ensuring it fits within the screen
             document.body.appendChild(message);
-
-            // Remove the message after animation ends
-            setTimeout(() => {
-                message.remove();
-            }, 5000); // Adjust this time to control how long the message stays visible
+            message.style.left = Math.random() * window.innerWidth + "px";
+            message.style.top = "-50px";
+            setTimeout(() => message.remove(), 5000);
         }
 
-        setInterval(createCrypticMessage, 2000); // New message every 2 seconds
+        setInterval(createCrypticMessage, 3000);
 
-        // Eye following cursor
-        const eye = document.getElementById('eye');
-        document.addEventListener('mousemove', (e) => {
-            const eyeX = e.clientX - 50; // Offset to center the eye on the cursor
-            const eyeY = e.clientY - 50; // Offset to center the eye on the cursor
-            eye.style.transform = `translate(${eyeX}px, ${eyeY}px)`;
+        document.addEventListener("mousemove", (event) => {
+            const eye = document.getElementById("eye");
+            const eyeX = eye.offsetLeft + eye.offsetWidth / 2;
+            const eyeY = eye.offsetTop + eye.offsetHeight / 2;
+            const angle = Math.atan2(event.clientY - eyeY, event.clientX - eyeX);
+            eye.style.transform = `rotate(${angle + Math.PI / 2}rad)`;
         });
-
-        setInterval(() => {
-            eye.style.opacity = eye.style.opacity === '1' ? '0.5' : '1'; // Flicker effect
-        }, 500); // Flicker every 500 milliseconds
-
-        // Auto-play audio
-        const audio = new Audio('whispers.mp3'); // Ensure you have the whispers.mp3 file
-        audio.loop = true; // Loop the audio
-        audio.play(); // Automatically play audio
     </script>
+
+    <!-- Auto-play audio -->
+    <audio id="background-audio" preload="auto" loop>
+        <source src="whispers.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const audio = document.getElementById('background-audio');
+            audio.muted = true;
+            audio.play().then(() => {
+                // Unmute after autoplay starts
+                audio.muted = false;
+            }).catch(error => {
+                console.log('Audio autoplay prevented by the browser.', error);
+            });
+        });
+    </script>
+
 </body>
 
 </html>

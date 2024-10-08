@@ -1,149 +1,271 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Xiaomi Bootloader Unlock Guide</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f0f2f5;
+            background-image: url('https://media1.giphy.com/media/1154CgmtPPa4lq/giphy.gif?cid=6c09b9520qi8z0fxsy8816q0rvosp2y0wip6lmy91tvo9l8j&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g'); /* Set background to GIF */
+            background-size: cover; /* Cover the entire body */
+            background-position: center; /* Center the background */
             margin: 0;
             padding: 0;
-            color: #333;
+            color: #fff; /* Change text color to white for better visibility */
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
+
         .container {
             max-width: 900px;
-            margin: 20px auto;
-            background: white;
+            margin: 0 auto; /* Center the container */
+            background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background for better visibility */
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow-y: auto; /* Enable vertical scroll if content overflows */
+            height: 100vh; /* Full height of the viewport */
         }
+
         h1 {
             color: #1A73E8;
             text-align: center;
+            animation: textFlash 1s infinite alternate; /* Flashing effect */
+            font-size: 2.5rem; /* Responsive font size */
         }
-        h2, h3 {
-            color: #333;
+
+        @keyframes textFlash {
+            0% {
+                color: red;
+            }
+
+            100% {
+                color: yellow;
+            } /* Flashing colors */
         }
-        ul, ol {
+
+        h2,
+        h3 {
+            color: #fff; /* Set headings color to white */
+            font-size: 1.75rem; /* Responsive font size */
+            margin-top: 20px;
+        }
+
+        ul,
+        ol {
             margin: 20px 0;
+            font-size: 1.2rem; /* Responsive font size */
         }
+
         a {
             color: #1A73E8;
             text-decoration: none;
         }
+
         a:hover {
             text-decoration: underline;
         }
+
         pre {
-            background: #f5f5f5;
+            background: rgba(255, 255, 255, 0.2); /* Slightly transparent background for code blocks */
             padding: 10px;
             border-radius: 5px;
             overflow-x: auto;
+            color: #fff; /* Set code text color to white */
         }
+
         footer {
             text-align: center;
             margin-top: 40px;
             font-size: 0.9em;
-            color: #888;
+            color: #ccc; /* Lighter color for footer text */
+        }
+
+        /* Eye effect */
+        .eye {
+            position: absolute;
+            width: 100px; /* Adjust the size of the eye */
+            height: 100px; /* Adjust the size of the eye */
+            background-image: url('https://media.giphy.com/media/1154CgmtPPa4lq/giphy.gif'); /* Eye GIF */
+            background-size: contain;
+            background-repeat: no-repeat;
+            pointer-events: none; /* Prevent mouse interactions */
+            transition: transform 0.1s ease; /* Smooth movement */
+            z-index: 1000; /* Ensure the eye is above other content */
+        }
+
+        /* Cryptic message effect */
+        .cryptic {
+            position: absolute;
+            color: #FF0000; /* Boston red */
+            white-space: nowrap;
+            font-size: 1.5rem; /* Responsive font size */
+            animation: fall 5s infinite linear;
+            opacity: 0;
+            z-index: 999; /* Ensure messages are above other content */
+        }
+
+        @keyframes fall {
+            0% {
+                top: -50px;
+                opacity: 1;
+            }
+
+            100% {
+                top: 100vh;
+                opacity: 0;
+            }
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem; /* Adjust heading size for mobile */
+            }
+
+            h2,
+            h3 {
+                font-size: 1.5rem; /* Adjust heading size for mobile */
+            }
+
+            ul,
+            ol {
+                font-size: 1rem; /* Adjust list size for mobile */
+            }
+
+            .eye {
+                width: 80px; /* Smaller eye for mobile */
+                height: 80px; /* Smaller eye for mobile */
+            }
         }
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    <h1>Full Guide: Unlocking the Bootloader on Xiaomi Devices</h1>
+    <div class="container">
+        <h1>Full Guide: Unlocking the Bootloader on Xiaomi Devices</h1>
 
-    <h2>Prerequisites</h2>
-    <ul>
-        <li>A Xiaomi account logged in on your device</li>
-        <li>A Windows PC</li>
-        <li><a href="https://developer.android.com/studio/releases/platform-tools" target="_blank">ADB and Fastboot</a> installed</li>
-        <li><a href="https://en.miui.com/unlock/" target="_blank">Mi Unlock Tool</a></li>
-        <li>USB cable</li>
-        <li>Backup your important data</li>
-        <li>Charge your phone to at least 60%</li>
-        <li>For HyperOS devices, install the <a href="https://play.google.com/store/apps/details?id=com.mi.global.bbs" target="_blank">Xiaomi Community App</a></li>
-    </ul>
+        <h2>Prerequisites</h2>
+        <ul>
+            <li>A Windows PC</li>
+            <li><a href="https://developer.android.com/studio/releases/platform-tools" target="_blank">ADB and Fastboot</a> installed</li>
+            <li><a href="https://en.miui.com/unlock/download_en.html" target="_blank">Updated Mi Unlock Tool (Version 7.6)</a></li>
+            <li>USB cable</li>
+            <li>Backup your important data</li>
+            <li>Charge your phone to at least 60%</li>
+            <li>For HyperOS devices, install the <a href="https://play.google.com/store/apps/details?id=com.mi.global.bbs" target="_blank">Xiaomi Community App</a></li>
+        </ul>
 
-    <h2>1. Apply for Bootloader Unlock on HyperOS Devices (Xiaomi Community App)</h2>
-    <ol>
-        <li>Install the <a href="https://play.google.com/store/apps/details?id=com.mi.global.bbs" target="_blank">Xiaomi Community App</a>.</li>
-        <li>Log in using your Xiaomi account.</li>
-        <li>Navigate to the "Services" section in the app.</li>
-        <li>Submit a request to unlock the bootloader in the "Unlock Bootloader Application" section.</li>
-        <li>Wait for Xiaomi’s approval, which can take up to 7 days.</li>
-    </ol>
+        <h2>1. Apply for Bootloader Unlock on HyperOS Devices (Xiaomi Community App)</h2>
+        <ol>
+            <li>Install the <a href="https://play.google.com/store/apps/details?id=com.mi.global.bbs" target="_blank">Xiaomi Community App</a>.</li>
+            <li>Log in using your Xiaomi account.</li>
+            <li>Navigate to the "Services" section in the app.</li>
+            <li>Submit a request to unlock the bootloader in the "Unlock Bootloader Application" section.</li>
+            <li>Wait for Xiaomi’s approval, which can take up to 7 days.</li>
+        </ol>
 
-    <h2>2. Enable Developer Options</h2>
-    <ol>
-        <li>Go to <strong>Settings</strong> > <strong>About phone</strong>.</li>
-        <li>Tap <strong>MIUI Version</strong> or <strong>HyperOS Version</strong> 7 times to enable developer options.</li>
-    </ol>
+        <h2>2. Enable Developer Options</h2>
+        <ol>
+            <li>Go to <strong>Settings</strong> > <strong>About phone</strong>.</li>
+            <li>Tap <strong>MIUI Version</strong> or <strong>HyperOS Version</strong> 7 times to enable developer options.</li>
+        </ol>
 
-    <h2>3. Enable OEM Unlocking and USB Debugging</h2>
-    <ol>
-        <li>Go to <strong>Settings</strong> > <strong>Additional settings</strong> > <strong>Developer options</strong>.</li>
-        <li>Enable <strong>OEM Unlocking</strong> and <strong>USB Debugging</strong>.</li>
-    </ol>
+        <h2>3. Enable OEM Unlocking and USB Debugging</h2>
+        <ol>
+            <li>Go to <strong>Settings</strong> > <strong>Additional settings</strong> > <strong>Developer options</strong>.</li>
+            <li>Enable <strong>OEM Unlocking</strong> and <strong>USB Debugging</strong>.</li>
+        </ol>
 
-    <h2>4. Link Xiaomi Account to Mi Unlock Status</h2>
-    <ol>
-        <li>In <strong>Developer Options</strong>, tap <strong>Mi Unlock status</strong>.</li>
-        <li>Tap <strong>Add account and device</strong> and ensure your Xiaomi account is logged in.</li>
-    </ol>
+        <h2>4. Link Xiaomi Account to Mi Unlock Status</h2>
+        <ol>
+            <li>In <strong>Developer Options</strong>, tap <strong>Mi Unlock status</strong>.</li>
+            <li>Tap <strong>Add account and device</strong> and ensure your Xiaomi account is logged in.</li>
+        </ol>
 
-    <h2>5. Install ADB, Fastboot, and Drivers</h2>
-    <ol>
-        <li>Download and install <a href="https://forum.xda-developers.com/showthread.php?t=2317790" target="_blank">Minimal ADB and Fastboot</a> or the official <a href="https://developer.android.com/studio/releases/platform-tools" target="_blank">Google Platform Tools</a>.</li>
-        <li>If needed, install the <a href="https://xiaomifirmware.com/downloads/" target="_blank">Xiaomi USB Drivers</a>.</li>
-    </ol>
+        <h2>5. Install ADB, Fastboot, and Drivers</h2>
+        <ol>
+            <li>Download and install <a href="https://developer.android.com/studio/releases/platform-tools" target="_blank">Google Platform Tools</a>.</li>
+            <li>If needed, install the Xiaomi USB Drivers. You can also use <a href="https://en.miui.com/unlock/download_en.html" target="_blank">MiUsbDriver.exe</a>, which includes ADB, Fastboot, and USB drivers.</li>
+        </ol>
 
-    <h2>6. Download Mi Unlock Tool</h2>
-    <ol>
-        <li>Download the official <a href="https://en.miui.com/unlock/" target="_blank">Mi Unlock Tool</a> from Xiaomi’s website.</li>
-        <li>Extract and install it on your PC.</li>
-    </ol>
+        <h2>6. Boot into Fastboot Mode</h2>
+        <ol>
+            <li>Power off your phone.</li>
+            <li>Press and hold the <strong>Volume Down</strong> + <strong>Power</strong> buttons until the Fastboot logo appears.</li>
+        </ol>
 
-    <h2>7. Boot into Fastboot Mode</h2>
-    <ol>
-        <li>Power off your Xiaomi device.</li>
-        <li>Hold <strong>Volume Down + Power</strong> to enter Fastboot Mode.</li>
-        <li>Connect your phone to the PC using a USB cable.</li>
-    </ol>
+        <h2>7. Unlock the Bootloader</h2>
+        <ol>
+            <li>Log in with the same Xiaomi account linked to your device.</li>
+            <li>Connect your phone via USB to the PC.</li>
+            <li>Once detected, click <strong>Unlock</strong>.</li>
+            <li>Once unlocked, the device will reboot and reset.</li>
+            <li>Set up your device as a new phone.</li>
+        </ol>
 
-    <h2>8. Unlock the Bootloader Using Mi Unlock Tool</h2>
-    <ol>
-        <li>Open the Mi Unlock Tool and sign in with the same Xiaomi account used on your phone.</li>
-        <li>The tool will detect your device.</li>
-        <li>Click <strong>Unlock</strong> and follow the instructions. For MIUI devices, a 168-hour wait might be required before unlocking.</li>
-        <li>Once the waiting period ends, reconnect the device and click <strong>Unlock</strong> again.</li>
-    </ol>
+        <h2>Useful Links</h2>
+        <ul>
+            <li><a href="https://rm-ux.github.io/pipa-crom-guide/" target="_blank">Custom ROM Guide for Xiaomi Devices</a></li>
+            <li><a href="https://rm-ux.github.io/pipa_root/" target="_blank">Root Guide for Xiaomi Devices</a></li>
+        </ul>
 
-    <h2>9. Complete the Unlock Process</h2>
-    <ol>
-        <li>Once unlocked, the device will reboot and reset.</li>
-        <li>Set up your phone as a new device (all data will be erased).</li>
-    </ol>
+        <footer>
+            Guide and website by: rmux
+        </footer>
+    </div>
 
-    <h2>Post-Unlocking: What's Next?</h2>
-    <ul>
-        <li>Install custom ROMs, root your device, or install custom recoveries like TWRP.</li>
-        <li>Keep in mind unlocking may void your warranty and disable certain security features.</li>
-    </ul>
+    <!-- Eye following script -->
+    <div class="eye" id="eye"></div>
 
-    <h2>Useful Links</h2>
-    <ul>
-        <li><a href="https://rm-ux.github.io/pipa-crom-guide/" target="_blank">Custom ROM Guide for Xiaomi Devices</a></li>
-        <li><a href="https://rm-ux.github.io/pipa_root/" target="_blank">Root Guide for Xiaomi Devices</a></li>
-    </ul>
+    <!-- Cryptic messages -->
+    <script>
+        const crypticMessages = [
+            "Are you really there?",
+            "What is reality?",
+            "They are watching you.",
+            "Everything is an illusion.",
+            "Do you hear the whispers?",
+            "They are watching us.",
+            "You are not alone.",
+            "Where did the time go?"
+        ];
 
-    <footer>
-        Guide and website by: rmux
-    </footer>
-</div>
+        function createCrypticMessage() {
+            const message = document.createElement('div');
+            message.className = 'cryptic';
+            message.textContent = crypticMessages[Math.floor(Math.random() * crypticMessages.length)];
+            message.style.left = Math.random() * (window.innerWidth - 200) + 'px'; // Ensuring it fits within the screen
+            document.body.appendChild(message);
 
+            // Remove the message after animation ends
+            setTimeout(() => {
+                message.remove();
+            }, 5000); // Adjust this time to control how long the message stays visible
+        }
+
+        setInterval(createCrypticMessage, 2000); // New message every 2 seconds
+
+        // Eye following cursor
+        const eye = document.getElementById('eye');
+        document.addEventListener('mousemove', (e) => {
+            const eyeX = e.clientX - 50; // Offset to center the eye on the cursor
+            const eyeY = e.clientY - 50; // Offset to center the eye on the cursor
+            eye.style.transform = `translate(${eyeX}px, ${eyeY}px)`;
+        });
+
+        setInterval(() => {
+            eye.style.opacity = eye.style.opacity === '1' ? '0.5' : '1'; // Flicker effect
+        }, 500); // Flicker every 500 milliseconds
+
+        // Auto-play audio
+        const audio = new Audio('whispers.mp3'); // Ensure you have the whispers.mp3 file
+        audio.loop = true; // Loop the audio
+        audio.play(); // Automatically play audio
+    </script>
 </body>
-                                      </html>
+
+</html>
